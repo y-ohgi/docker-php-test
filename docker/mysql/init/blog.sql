@@ -3,7 +3,7 @@ USE blog;
 
 CREATE TABLE Categories(
   id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  name varchar(255) NOT NULL UNIQUE
+  name varchar(30) NOT NULL UNIQUE
 );
 INSERT INTO Categories(id, name) VALUES
   (1, "ゲーム"),
@@ -13,7 +13,7 @@ INSERT INTO Categories(id, name) VALUES
 
 CREATE TABLE PublishStates(
   id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  state varchar(255) NOT NULL UNIQUE
+  state varchar(10) NOT NULL UNIQUE
 );
 INSERT INTO PublishStates(id, state) VALUES
   (1, "下書き"),
@@ -29,7 +29,7 @@ CREATE TABLE PendingRegistrations(
 
 CREATE TABLE Users(
   id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  name varchar(255) NOT NULL UNIQUE,
+  name varchar(30) NOT NULL UNIQUE,
   email varchar(255) NOT NULL UNIQUE,
   password varchar(255) NOT NULL,
   description varchar(255),
@@ -42,7 +42,7 @@ CREATE TABLE Users(
 CREATE TABLE Blogs(
   id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   category_id int(11) NOT NULL,
-  title varchar(255) NOT NULL,
+  title varchar(140) NOT NULL,
   description TEXT,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -62,9 +62,9 @@ CREATE TABLE Posts(
   user_id int(11) NOT NULL,
   blog_id int(11) NOT NULL,
   publish_state_id int(11) NOT NULL DEFAULT 1, # デフォルトは下書き状態にする
-  title varchar(255) NOT NULL,
+  title varchar(140) NOT NULL,
   content TEXT,
-  pv int(11) UNSIGNED NOT NULL DEFAULT 0,
+  page_view int(11) UNSIGNED NOT NULL DEFAULT 0,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   INDEX(user_id, blog_id),
