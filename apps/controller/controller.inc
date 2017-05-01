@@ -11,7 +11,10 @@ abstract class Controller{
     }
 
     public function view(){
-        $this->smarty->assign("loggedin", User::myself());
+        $loggedin = false;
+        if(User::myself()) $loggedin = true;
+        $this->smarty->assign("loggedin", $loggedin);
+
         $this->smarty->display(__DIR__.'/../view/'.$this->display_tpl);
     }
 
